@@ -10,5 +10,5 @@ router.get('/', (req, res) => {
 router.post("/createUser", CreateUser)
 router.get("/login", loginUser)
 router.post("/forget", Forget_Password)
-router.post("/reset", Reset_Password)
+router.get("/reset", Reset_Password)
 module.exports = router
