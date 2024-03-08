@@ -1,10 +1,12 @@
 const express = require('express')
+const cors = require("cors")
 const route = require('./routes/route')
 
 const app = express()
 const mongoose = require('mongoose')
 
 app.use(express.json())
+app.use(cors())
 
 mongoose.connect("mongodb+srv://sumit:sumit@cluster0.8dflsuw.mongodb.net/ATG",{useNewUrlParser:true})
     .then(() => {
