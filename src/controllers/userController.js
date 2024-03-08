@@ -120,7 +120,7 @@ const Reset_Password = async (req, res) => {
         const secure_Password = await bcrypt.hash(password, salt)
         const saveData = await userModel.findByIdAndUpdate({_id:validateUser._id},{ $set:{password:secure_Password, token:""}}, {new:true})
 
-        res.status(200).send({status:false, message:saveData})
+        res.status(200).send({status:true, message:saveData})
 
     } catch (error) {
         res.status(500).send({ status: false, message: error.message })
