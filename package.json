@@ -1,0 +1,28 @@
+{
+  "name": "banaonodejs",
+  "version": "1.0.0",
+  "description": "Banao technologies (ATG)",
+  "main": "index.js",
+  "scripts": {
+    "nodemon": "nodemon src/index.js",
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sumo47/BanaoNodejs.git"
+  },
+  "author": "sumit kumar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sumo47/BanaoNodejs/issues"
+  },
+  "homepage": "https://github.com/sumo47/BanaoNodejs#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.18.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.2.1",
+    "nodemon": "^3.1.0"
+  }
+}
