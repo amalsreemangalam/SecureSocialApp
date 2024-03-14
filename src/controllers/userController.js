@@ -27,7 +27,7 @@ const CreateUser = async (req, res) => {
         const token = jwt.sign({ user_Id: saveData.id }, JWT_SECRETKEY)
         res.setHeader('ATG-API-KEY', token);
 
-        res.status(200).send({ status: true, token: token })
+        res.status(200).send({ status: true,data:saveData, token: token })
 
     } catch (error) {
         res.status(500).send({ statue: false, message: error.message })
