@@ -24,4 +24,27 @@ const createPost = async (req, res, next) => {
     }
 }
 
+const getPostById = async (req, res) => {
+    try {
+        let postId = req.params.postId
+
+        if(!postId) return res.status(404).send({status:false, message:"postId require!"})
+        if(!mongoose.isValidObjectId(postId)) return res.status(404).send({status:false, message:"Invalid postId"}) 
+
+        const savedData = await postModel.findOne({_id:postId})
+
+        if(!savedData) return res.status(404).send({status: false, message:'No Data Found'})
+        if(savedData.isDeleted == true) return res.status(404).send({status:false, message:"Post id deleted!"})
+
+        res.status(200).send({ status: true, message: savedData })
+
+    } catch (error) {
+        res.status(500).send({status:false, message:error.message});
+    }
+}
+
+
+
+
 module.exports.createPost = createPost
+module.exports.getPostById = getPostById
