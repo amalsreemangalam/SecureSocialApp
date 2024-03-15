@@ -4,7 +4,11 @@ const ObjectId = mongoose.Schema.Types.ObjectId
 const commentSchema = new mongoose.Schema({
     authorId: {
         type: ObjectId,
-        ref: user
+        ref: "user"
+    },
+    postId:{
+        type: ObjectId,
+        ref: "post"
     },
     comment: {
         type: String,
@@ -12,11 +16,11 @@ const commentSchema = new mongoose.Schema({
     },
     isDeleted: {
         type: Boolean,
-        dafault: false
+        default: false
     },
     DeletedAt: {
-        type: Boolean,
-        default: false
+        type: Date,
+        default:null
     }
 }, { timestamps:true })
 

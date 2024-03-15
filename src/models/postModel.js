@@ -2,32 +2,32 @@ const mongoose = require('mongoose')
 const ObjectId = mongoose.Schema.Types.ObjectId
 
 const postSchema = new mongoose.Schema({
-    authorId:{
+    authorId: {
         type: ObjectId,
         ref: 'user',
-        require:true
+        require: true
     },
-    post:{
+    post: {
         type: String,
-        require:true
+        require: true
     },
-    likes:[{
-            type: ObjectId,
-            ref: 'user'
-        }],
-    comments:[{
-        type:ObjectId,
-        ref:comment
+    likes: [{
+        type: ObjectId,
+        ref: 'user'
     }],
-    isDeleted:{
+    comments: [{
+        type: ObjectId,
+        ref: "comment"
+    }],
+    isDeleted: {
         type: Boolean,
         default: false
     },
-    DeletedAt:{
+    DeletedAt: {
         type: Date,
         default: null
     }
 },
-    {timestamps: true})
+    { timestamps: true })
 
 module.exports = mongoose.model('post', postSchema)

@@ -11,7 +11,7 @@ const createPost = async (req, res, next) => {
         if (Object.keys(data).length == 0) return res.status(404).send({ status: false, message: "body require!" })
         if (!post) return res.status(404).send({ status: false, message: "post require!" })
         if (!authorId) return res.status(404).send({ status: false, message: "authorId require!" })
-        if (!mongoose.isValidObjectId(authorId)) return res.status(404).send({ status: false, message: "author id is not valid" })
+        if (!mongoose.isValidObjectId(authorId)) return res.status(404).send({ status: false, message: `Invalid ${authorId}` });
 
         let checkAuthor = await userModel.findById(authorId)
         if (!checkAuthor) return res.status(404).send({ status: false, message: "author not found" })
