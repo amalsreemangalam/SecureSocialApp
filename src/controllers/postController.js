@@ -64,8 +64,44 @@ const getPost = async (req, res) => {
     }
 }
 
+const updatePostById = async (req, res) => {
+    try {
+        let id = req.params.postId
+        let data = req.body
+        let { post } = data
+
+        if (!id) return res.status(404).send({ status: false, message: `postId is required!` })
+        if (!mongoose.isValidObjectId(id)) return res.status(404).send({ status: false, message: `Invalid ${id}` })
+
+        if (Object.keys(data).length == 0)
+            return res.status(400).send({ status: false, message: "body required!" })
+        if (!post) return res.status(400).send({ status: false, message: "post required!" })
+
+        let existPost = await postModel.findOne({ _id: id, isDeleted: false })
+        if (!existPost) return res.status(404).send({ status: false, message: `No Post Found or Deleted` })
+
+        // check owner of this post
+        // todo req.user_Id global declaration from middleware
+        console.log(existPost.authorId, req.user_Id)
+        if (existPost.authorId != req.user_Id) return res.status(404).send({ status: false, message: 'You are not the owner!' })
+
+        let updatedPost = await postModel.findOneAndUpdate({ _id: id, isDeleted: false }, data, { new: true })
+
+        // if(!updatedPost) return res.status(404).send({ status: false, message: 'No such a post'})
+
+        // if (updatedPost.isDeleted == true) return res.status(404).send({ status: false, message: "Post id deleted!" })
+
+        res.status(200).send({ status: true, message: "success", data: updatedPost })
+
+
+
+    } catch (error) {
+        res.status(500).send({ status: false, message: error.message });
+    }
+}
 
 
 module.exports.createPost = createPost
 module.exports.getPostById = getPostById
 module.exports.getPost = getPost
+module.exports.updatePostById = updatePostById

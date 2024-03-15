@@ -1,6 +1,7 @@
 const express = require('express')
 const { CreateUser, loginUser, Forget_Password, Reset_Password } = require('../controllers/userController')
-const { createPost, getPostById, getPost } = require('../controllers/postController')
+const { createPost, getPostById, getPost, updatePostById } = require('../controllers/postController')
+const { authentication } = require('../middleware/auth')
 const router = express.Router()
 
 
@@ -18,4 +19,5 @@ router.get("/reset", Reset_Password)
 router.post("/createPost", createPost)
 router.get("/posts/:postId", getPostById)
 router.get("/posts",getPost)
+router.put("/posts/:postId",authentication, updatePostById)
 module.exports = router

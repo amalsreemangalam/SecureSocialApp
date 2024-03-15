@@ -25,7 +25,7 @@ const CreateUser = async (req, res) => {
         const saveData = await userModel.create({ username: data.username, Email: data.Email, password: secure_Password })
 
         const token = jwt.sign({ user_Id: saveData.id }, JWT_SECRETKEY)
-        res.setHeader('ATG-API-KEY', token);
+        res.setHeader('atg-api-key', token);
 
         res.status(200).send({ status: true,data:saveData, token: token })
 
@@ -51,7 +51,7 @@ const loginUser = async (req, res) => {
         if (!password_Compare) return res.status(404).send({ status: false, message: "Invalid password!" })
 
         let token = jwt.sign({ user_Id: validate_Username.id }, JWT_SECRETKEY)
-        res.setHeader("ATG-API-KEY", token)
+        res.setHeader("atg-api-key", token)
 
         res.status(200).send({ status: true, message: "Login Successfull!", token: token })
 
