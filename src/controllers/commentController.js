@@ -17,9 +17,9 @@ const createComment = async (req, res) => {
         if(!postId) return res.status(404).send({status: false, message:`provide ${postId} in param`})
         if(!mongoose.isValidObjectId(postId)) return res.status(404).send({status:false ,message:`invalid ${postId}`});
 
-        const existPost = await postModel.findById({_id:postId, isDeleted:false})
+        const existPost = await postModel.findOne({_id:postId, isDeleted:false})
 
-        if(!existPost) return res.status(404).send({status:false, message:`Post not found`})
+        if(!existPost) return res.status(404).send({status:false, message:`Post not found or deleted`});
 
         const savedData =  await commentModel.create(data)
 

@@ -18,15 +18,15 @@ router.post("/forget", Forget_Password)
 router.get("/reset", Reset_Password)
 
 //post
-router.post("/createPost",authentication, createPost)
-router.get("/posts/:postId",authentication, getPostById)
-router.get("/posts",authentication,getPost)
-router.put("/posts/:postId",authentication, updatePostById)
-router.put("/delete/:postId",authentication, deletePostById)
+router.post("/createPost", authentication, createPost)
+router.get("/posts/:postId", authentication, getPostById)
+router.get("/posts", authentication, getPost)
+router.put("/posts/:postId", authentication, updatePostById)
+router.put("/delete/:postId", authentication, deletePostById)
 
 //likes
-router.put('/likes/:postId',authentication, likeDislikePost)
+router.put('/likes/:postId', authentication, likeDislikePost)
 
 //comments
-router.post("/comment/:postId", authentication,createComment)
+router.post("/comment/:postId", authentication, createComment)
 module.exports = router

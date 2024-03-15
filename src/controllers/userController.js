@@ -27,7 +27,7 @@ const CreateUser = async (req, res) => {
         const token = jwt.sign({ user_Id: saveData.id }, JWT_SECRETKEY)
         res.setHeader('atg-api-key', token);
 
-        res.status(200).send({ status: true,data:saveData, token: token })
+        res.status(200).send({ status: true, data: saveData, token: token })
 
     } catch (error) {
         res.status(500).send({ statue: false, message: error.message })
@@ -112,15 +112,15 @@ const Reset_Password = async (req, res) => {
         if (!validateUser) return res.status(400).send({ status: false, message: "token not valid or expired" })
 
         let data = req.body
-        const {password} = data
+        const { password } = data
 
-        if(!password) return res.status(400).send({status:false, message:"Password require"})
+        if (!password) return res.status(400).send({ status: false, message: "Password require" })
 
         const salt = await bcrypt.genSalt(10)
         const secure_Password = await bcrypt.hash(password, salt)
-        const saveData = await userModel.findByIdAndUpdate({_id:validateUser._id},{ $set:{password:secure_Password, token:""}}, {new:true})
+        const saveData = await userModel.findByIdAndUpdate({ _id: validateUser._id }, { $set: { password: secure_Password, token: "" } }, { new: true })
 
-        res.status(200).send({status:true, message:saveData})
+        res.status(200).send({ status: true, message: saveData })
 
     } catch (error) {
         res.status(500).send({ status: false, message: error.message })

@@ -16,6 +16,9 @@ const createPost = async (req, res, next) => {
         let checkAuthor = await userModel.findById(authorId)
         if (!checkAuthor) return res.status(404).send({ status: false, message: "author not found" })
 
+        //authorization
+        if (authorId != req.user_Id) return res.status(404).send({ status: false, message: 'You are not the owner!' })
+
         const savedData = await postModel.create(data)
         res.status(201).send({ status: true, message: savedData })
 
@@ -54,6 +57,8 @@ const getPost = async (req, res) => {
         }
 
         let savedData = await postModel.find(data)
+        
+        if (savedData.authorId != req.user_Id) return res.status(404).send({ status: false, message: 'You are not the owner!' })
 
         if (savedData.length == 0) return res.status(404).send({ status: false, message: `Not Found Post` })
 
@@ -80,9 +85,9 @@ const updatePostById = async (req, res) => {
         let existPost = await postModel.findOne({ _id: id, isDeleted: false })
         if (!existPost) return res.status(404).send({ status: false, message: `No Post Found or Deleted` })
 
-        // check owner of this post
-        // todo req.user_Id global declaration from middleware
-        console.log(existPost.authorId, req.user_Id)
+        // authorization
+        // todo req.user_Id global declaration at middleware
+        // console.log(existPost.authorId, req.user_Id)
         if (existPost.authorId != req.user_Id) return res.status(404).send({ status: false, message: 'You are not the owner!' })
 
         let updatedPost = await postModel.findOneAndUpdate({ _id: id, isDeleted: false }, data, { new: true })
@@ -115,7 +120,7 @@ const deletePostById = async (req, res) => {
 
         let saveData = await postModel.findByIdAndUpdate({ _id: Id }, { $set: { isDeleted: true, DeletedAt: new Date() } }, { new: true })
 
-        return res.status(200).send({ status: true, message:"success" });
+        return res.status(200).send({ status: true, message: "success" });
 
     } catch (error) {
         res.status(500).send({ status: false, message: error.message });
