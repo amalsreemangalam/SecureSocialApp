@@ -2,6 +2,7 @@ const express = require('express')
 const { CreateUser, loginUser, Forget_Password, Reset_Password } = require('../controllers/userController')
 const { createPost, getPostById, getPost, updatePostById, deletePostById } = require('../controllers/postController')
 const { authentication } = require('../middleware/auth')
+const { likePost, likeDislikePost } = require('../controllers/LikeDislikeController')
 const router = express.Router()
 
 
@@ -16,9 +17,12 @@ router.post("/forget", Forget_Password)
 router.get("/reset", Reset_Password)
 
 //post
-router.post("/createPost", createPost)
-router.get("/posts/:postId", getPostById)
-router.get("/posts",getPost)
+router.post("/createPost",authentication, createPost)
+router.get("/posts/:postId",authentication, getPostById)
+router.get("/posts",authentication,getPost)
 router.put("/posts/:postId",authentication, updatePostById)
 router.put("/delete/:postId",authentication, deletePostById)
+
+//likes
+router.put('/likes/:postId',authentication, likeDislikePost)
 module.exports = router
