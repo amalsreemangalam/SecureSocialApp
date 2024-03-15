@@ -100,8 +100,30 @@ const updatePostById = async (req, res) => {
     }
 }
 
+const deletePostById = async (req, res) => {
+    try {
+        let Id = req.params.postId
+
+        if (!Id) return res.status(404).send({ status: false, message: `postId is required!` })
+        if (!mongoose.isValidObjectId(Id)) return res.status(404).send({ status: false, message: `Invalid ${Id}` })
+
+        let existPost = await postModel.findOne({ _id: Id, isDeleted: false })
+        if (!existPost) return res.status(404).send({ status: false, message: `No Post Found or Deleted` })
+
+        //authorization 
+        if (existPost.authorId != req.user_Id) return res.status(404).send({ status: false, message: `Unauthorized User` })
+
+        let saveData = await postModel.findByIdAndUpdate({ _id: Id }, { $set: { isDeleted: true, DeletedAt: new Date() } }, { new: true })
+
+        return res.status(200).send({ status: true, message:"success" });
+
+    } catch (error) {
+        res.status(500).send({ status: false, message: error.message });
+    }
+}
 
 module.exports.createPost = createPost
 module.exports.getPostById = getPostById
 module.exports.getPost = getPost
 module.exports.updatePostById = updatePostById
+module.exports.deletePostById = deletePostById
