@@ -15,6 +15,10 @@ const postSchema = new mongoose.Schema({
             type: ObjectId,
             ref: 'user'
         }],
+    comments:[{
+        type:ObjectId,
+        ref:comment
+    }],
     isDeleted:{
         type: Boolean,
         default: false
