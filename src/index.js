@@ -8,7 +8,7 @@ const mongoose = require('mongoose')
 app.use(express.json())
 app.use(cors())
 
-mongoose.connect("mongodb+srv://sumit:sumit@cluster0.8dflsuw.mongodb.net/ATG",{useNewUrlParser:true})
+mongoose.connect("mongodb+srv://sumit:sumit@cluster0.8dflsuw.mongodb.net/ATG")
     .then(() => {
         console.log("MongoDb is connected")
     }).catch((err) => { console.log(err.message) })

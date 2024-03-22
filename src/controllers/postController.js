@@ -48,17 +48,17 @@ const getPostById = async (req, res) => {
 
 const getPost = async (req, res) => {
     try {
-        let data = req.query
+        let data = {}
         data.isDeleted = false
-        let { authorId } = data
-
-        if (authorId) {
-            if (!mongoose.isValidObjectId(authorId)) return res.status(404).send({ status: false, message: "author id is not valid" })
-        }
-
-        let savedData = await postModel.find(data)
         
-        if (savedData.authorId != req.user_Id) return res.status(404).send({ status: false, message: 'You are not the owner!' })
+        const userId = req.user_Id
+
+        let checkUser = await userModel.findById(userId)
+        if (!checkUser) return res.status(404).send({ status: false, message: "user not found" })
+
+        data.authorId = userId
+
+        let savedData = await postModel.find(data)      
 
         if (savedData.length == 0) return res.status(404).send({ status: false, message: `Not Found Post` })
 

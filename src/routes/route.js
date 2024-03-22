@@ -4,6 +4,7 @@ const { createPost, getPostById, getPost, updatePostById, deletePostById } = req
 const { authentication } = require('../middleware/auth')
 const { likePost, likeDislikePost } = require('../controllers/LikeDislikeController')
 const { createComment } = require('../controllers/commentController')
+const { encryption } = require('../controllers/test')
 const router = express.Router()
 
 
@@ -29,4 +30,7 @@ router.put('/likes/:postId', authentication, likeDislikePost)
 
 //comments
 router.post("/comment/:postId", authentication, createComment)
+
+//test 
+router.post("/test", encryption)
 module.exports = router

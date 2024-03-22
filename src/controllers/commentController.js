@@ -10,7 +10,7 @@ const createComment = async (req, res) => {
         data.authorId = req.user_Id
 
         let {comment, postId} = data;
-        console.log(data)
+        // console.log(data)
 
         if(Object.keys(data).length == 0) return res.status(404).send({status:false, message:"body required"})
         if(!comment) return res.status(404).send({status: false, message:"provide comment"})
