@@ -22,6 +22,12 @@ Create APIs for
 
 3. Likes & add a comment to a post API.
 
+
+4. Add Jwt auth token in all apis
+
+
+5. Perform data encryption {Optional}
+
  
 
 Submission Guidelines:

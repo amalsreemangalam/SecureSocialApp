@@ -1,12 +1,13 @@
 const mongoose = require("mongoose")
 const ObjectId = mongoose.Schema.Types.ObjectId
+const encryption = require('mongoose-encryption')
 
 const commentSchema = new mongoose.Schema({
     authorId: {
         type: ObjectId,
         ref: "user"
     },
-    postId:{
+    postId: {
         type: ObjectId,
         ref: "post"
     },
@@ -20,8 +21,10 @@ const commentSchema = new mongoose.Schema({
     },
     DeletedAt: {
         type: Date,
-        default:null
+        default: null
     }
-}, { timestamps:true })
+}, { timestamps: true })
 
+const Secret_Key = "Atg-end-to-end-encryption"
+commentSchema.plugin(encryption, { secret: Secret_Key, encryptedFields: ["comment"] })
 module.exports = mongoose.model('comment', commentSchema)
