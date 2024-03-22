@@ -58,7 +58,7 @@ const getPost = async (req, res) => {
 
         data.authorId = userId
 
-        let savedData = await postModel.find(data)      
+        let savedData = await postModel.find(data).populate('comments').populate('likes')  
 
         if (savedData.length == 0) return res.status(404).send({ status: false, message: `Not Found Post` })
 
