@@ -91,14 +91,7 @@ const updatePostById = async (req, res) => {
         if (existPost.authorId != req.user_Id) return res.status(404).send({ status: false, message: 'You are not the owner!' })
 
         let updatedPost = await postModel.findOneAndUpdate({ _id: id, isDeleted: false }, data, { new: true })
-
-        // if(!updatedPost) return res.status(404).send({ status: false, message: 'No such a post'})
-
-        // if (updatedPost.isDeleted == true) return res.status(404).send({ status: false, message: "Post id deleted!" })
-
         res.status(200).send({ status: true, message: "success", data: updatedPost })
-
-
 
     } catch (error) {
         res.status(500).send({ status: false, message: error.message });
