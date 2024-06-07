@@ -28,10 +28,4 @@ Create APIs for
 
 5. Perform data encryption {Optional}
 
- 
 
-Submission Guidelines:
-
- 
-
-Submit a video showcasing the above functionalities
