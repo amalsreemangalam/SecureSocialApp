@@ -1,5 +1,5 @@
 # SecureSocialApp
-SecureSocialApp is a robust web application built with React.js and Node.js, featuring secure user authentication, CRUD operations for social media posts, likes, comments, and optional data encryption.
+SecureSocialApp is a robust web application built with Node.js, featuring secure user authentication, CRUD operations for social media posts, likes, comments, and optional data encryption.
 
 ## Features
 - User Registration: Register with email, password, and username.
