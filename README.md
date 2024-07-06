@@ -17,9 +17,9 @@ I am actively seeking opportunities and available for freelance or full-time wor
 - Authentication: JWT
 - Eamil sender - nodemailer
 - Encryption : bcrypt.js
-## Deployment:` https://sumit-backend-notebook.glitch.me `
+## Deployment:` https://sumit-backend-socialsecureapp.glitch.me `
 ## Get Started
-- Clone the repository: `git clone [https://github.com/yourusername/SecureSocialApp.git](https://github.com/sumo47/SecureSocialApp.git)`
+- Clone the repository: `git clone https://sumit-backend-socialsecureapp.glitch.me`
 - Install dependencies: `npm install`
 - Run the development server: `npm start`
 ## Contribution
